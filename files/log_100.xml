@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<requests>
+  <request>
+    <url>http://www.google.fr</url>
+    <method>GET</method>
+    <sendDateTime>2018-02-01T16:00:10.000+01:00</sendDateTime>
+    <headers>
+    	<header>
+    		<key>Authorization</key>
+    		<value>WSSE profile="UsernameToken"</value>
+    	</header>
+    	<header>
+    		<key>X-WSSE</key>
+    		<value>UsernameToken Username="rawdata", PasswordDigest="n9CMcL5nSHo5LeuQfhU0y3e0xrM=", Nonce="Mzg0MDM1OTJlYTZmMmViZQ==", Created="2018-01-11T14:35:56+00:00"</value>
+    	</header>
+    	<header>
+    		<key>Content-Type</key>
+    		<value>application/json</value>
+    	</header>
+    </headers>
+  </request>
+  <request>
+    <url>http://www.google.fr</url>
+    <method>GET</method>
+    <sendDateTime>2018-02-01T16:00:10.000+01:00</sendDateTime>
+    <headers></headers>
+  </request>
+  <request>
+    <url>http://www.google.fr</url>
+    <method>GET</method>
+    <sendDateTime>2018-02-01T16:00:10.000+01:00</sendDateTime>
+    <headers></headers>
+  </request>
+  <request>
+    <url>http://www.google.fr</url>
+    <method>GET</method>
+    <sendDateTime>2018-02-01T16:00:10.000+01:00</sendDateTime>
+    <headers></headers>
+  </request>
+  <request>
+    <url>http://www.google.fr</url>
+    <method>GET</method>
+    <sendDateTime>2018-02-01T16:00:10.000+01:00</sendDateTime>
+    <headers></headers>
+  </request>
+</requests>
