@@ -3,7 +3,6 @@ package api;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,10 +14,8 @@ import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import bean.Log;
 
@@ -59,11 +56,21 @@ public class XmlLogParser {
 						}
 					}
 
-					NodeList nBody = eRequest.getElementsByTagName("content-raw");
-					//					NamedNodeMap nBodyAttrs = nBody.item(0).getAttributes();
-					//					log.bodyType = nBodyAttrs.getNamedItem("type").getNodeValue(); 
-					//					log.bodyFormat = nBodyAttrs.getNamedItem("format").getNodeValue();
-					log.body = nBody.item(0).getTextContent();
+					NodeList nBody;
+					nBody = eRequest.getElementsByTagName("content-raw");
+					if(nBody.getLength() > 0) {
+						log.body = nBody.item(0).getTextContent();	
+					} else {
+						nBody = eRequest.getElementsByTagName("content-list");
+						for (int iContent = 0; iContent < nBody.getLength(); iContent++) {
+							Node nContent = nBody.item(iContent);
+							if (nContent.getNodeType() == Node.ELEMENT_NODE) {
+								Element eContent = (Element) nContent;
+								log.addContent(eContent.getElementsByTagName("key").item(0).getTextContent(), eContent.getElementsByTagName("value").item(0).getTextContent());
+							}
+						}
+					}
+					
 
 					logs.add(log);
 				}

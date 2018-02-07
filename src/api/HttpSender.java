@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
 import java.util.stream.Collectors;
 
 import org.apache.http.HttpResponse;
@@ -11,7 +12,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClients;
 
-public class HttpSender implements Runnable {
+public class HttpSender extends Observable implements Runnable {
 
 	private HttpUriRequest request;
 	private ArrayList<String> trace;
@@ -38,24 +39,35 @@ public class HttpSender implements Runnable {
 			Long during = new Date().getTime() - senDate;
 			trace.add("During [" + during + "ms] ");
 			trace.add("Code [" + response.getStatusLine().getStatusCode() + "] ");
-			
+
 			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 			setOutput(rd.lines().collect(Collectors.joining()));
-			
+
 
 		} catch (Exception e) {
 			trace.add("Exception "+e.getMessage());
 		}
 		trace.add("Method [" + request.getMethod() + "] ");
 		trace.add("URL [" + request.getURI() + "]");
-		
 
-		for (String line : trace) {
-			System.out.print(line);
-		}
-		System.out.println();
-		System.out.println(this.output);
-		
+		setChanged();
+		notifyObservers();
+	}
+
+	public HttpUriRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpUriRequest request) {
+		this.request = request;
+	}
+
+	public ArrayList<String> getTrace() {
+		return trace;
+	}
+
+	public void setTrace(ArrayList<String> trace) {
+		this.trace = trace;
 	}
 
 	public String getOutput() {
@@ -65,6 +77,4 @@ public class HttpSender implements Runnable {
 	public void setOutput(String output) {
 		this.output = output;
 	}
-
-
 }

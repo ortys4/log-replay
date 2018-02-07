@@ -9,12 +9,14 @@ public class Log {
 	public String method;
 	public String url;
 	public HashMap<String, String> headers;
+	public HashMap<String, String> contents;
 //	public String bodyType;
 //	public String bodyFormat;
 	public String body;
 	
 	public Log() {
 		headers = new HashMap<String, String>();
+		contents = new HashMap<String, String>();
 	}
 	
 	
@@ -24,5 +26,9 @@ public class Log {
 	
 	public void addHeader(String key, String value) {
 		headers.put(key, value);
+	}
+	
+	public void addContent(String key, String value) {
+		contents.put(key, value);
 	}
 }
