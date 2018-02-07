@@ -1,6 +1,5 @@
 package api;
 
-import java.io.File;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,8 +18,7 @@ public class JsonLogParser {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
 		try {
-			String basePath = new File("").getAbsolutePath();
-			FileReader reader = new FileReader(basePath + filePath);
+			FileReader reader = new FileReader(filePath);
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 

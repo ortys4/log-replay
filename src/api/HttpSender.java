@@ -1,7 +1,10 @@
 package api;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,11 +14,16 @@ import org.apache.http.impl.client.HttpClients;
 public class HttpSender implements Runnable {
 
 	private HttpUriRequest request;
-	private ArrayList<String> output;
+	private ArrayList<String> trace;
+	private String output;
 
+	/**
+	 * 
+	 * @param request
+	 */
 	public HttpSender(HttpUriRequest request) {
 		this.request = request;
-		this.output = new ArrayList<String>();
+		this.trace = new ArrayList<String>();
 	}
 
 	@Override
@@ -24,23 +32,38 @@ public class HttpSender implements Runnable {
 			HttpClient httpclient = HttpClients.createDefault();
 			Long senDate = new Date().getTime();
 
-			output.add("Send at [" + senDate + "] ");
+			trace.add("Send at [" + senDate + "] ");
 			HttpResponse response = httpclient.execute(request);
 
 			Long during = new Date().getTime() - senDate;
-			output.add("During [" + during + "ms] ");
-			output.add("Response [" + response.getStatusLine().getStatusCode() + "] ");
+			trace.add("During [" + during + "ms] ");
+			trace.add("Code [" + response.getStatusLine().getStatusCode() + "] ");
+			
+			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			setOutput(rd.lines().collect(Collectors.joining()));
+			
 
 		} catch (Exception e) {
-			output.add("Exception "+e.getMessage());
+			trace.add("Exception "+e.getMessage());
 		}
-		output.add("Method [" + request.getMethod() + "] ");
-		output.add("URL [" + request.getURI() + "]");
+		trace.add("Method [" + request.getMethod() + "] ");
+		trace.add("URL [" + request.getURI() + "]");
+		
 
-		for (String line : output) {
+		for (String line : trace) {
 			System.out.print(line);
 		}
 		System.out.println();
+		System.out.println(this.output);
+		
+	}
+
+	public String getOutput() {
+		return output;
+	}
+
+	public void setOutput(String output) {
+		this.output = output;
 	}
 
 

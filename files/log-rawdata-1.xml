@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<requests>
+  <request>
+    <url>http://rawdata.docker/app_dev.php/rest/import/offers</url>
+    <method>POST</method>
+    <sendDateTime>2018-02-01T16:00:10.000+01:00</sendDateTime>
+    <headers>
+    	<header>
+    		<key>Authorization</key>
+    		<value>WSSE profile="UsernameToken"</value>
+    	</header>
+    	<header>
+    		<key>X-WSSE</key>
+    		<value>UsernameToken Username="rawdata", PasswordDigest="n9CMcL5nSHo5LeuQfhU0y3e0xrM=", Nonce="Mzg0MDM1OTJlYTZmMmViZQ==", Created="2018-01-11T14:35:56+00:00"</value>
+    	</header>
+    </headers>
+    <body type="raw" format="application/json">
+    	<content>{
+			"offers":
+						{"filepath": "offer_creation_job27_20180122_151850.csv","md5_checksum": "cfe1df5b07bb0a00f63b8ddff8862a36"}
+			,
+			"logo":
+						{"filepath": "offer_visual_job27_20180122_151850.json","md5_checksum": "6b9b885264d71aa6ebbaadddcdf83cf5b27"}
+			,
+			"targets":
+						{"filepath": "offer_allocation_job27_20180122_151850.csv","md5_checksum": "4c46e82d103b25abff9c6a0ba4a0d760"}
+		}</content>
+    </body>
+  </request>
+</requests>

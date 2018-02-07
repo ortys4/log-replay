@@ -3,12 +3,14 @@ package api;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -22,8 +24,8 @@ public class XmlLogParser {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 		
 		try {
-			String basePath = new File("").getAbsolutePath();
-			File fXmlFile = new File(basePath + filePath);
+			
+			File fXmlFile = new File(filePath);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
@@ -48,6 +50,12 @@ public class XmlLogParser {
 							log.addHeader(eHeader.getElementsByTagName("key").item(0).getTextContent(), eHeader.getElementsByTagName("value").item(0).getTextContent());
 						}
 					}
+					
+					NodeList nBody = eRequest.getElementsByTagName("body");
+//					NamedNodeMap nBodyAttrs = nBody.item(0).getAttributes();
+//					log.bodyType = nBodyAttrs.getNamedItem("type").getNodeValue(); 
+//					log.bodyFormat = nBodyAttrs.getNamedItem("format").getNodeValue();
+					log.body = nBody.item(0).getTextContent();
 					
 					logs.add(log);
 				}

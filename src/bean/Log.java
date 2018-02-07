@@ -9,6 +9,9 @@ public class Log {
 	public String method;
 	public String url;
 	public HashMap<String, String> headers;
+//	public String bodyType;
+//	public String bodyFormat;
+	public String body;
 	
 	public Log() {
 		headers = new HashMap<String, String>();
