@@ -14,8 +14,8 @@
     		<value>UsernameToken Username="rawdata", PasswordDigest="n9CMcL5nSHo5LeuQfhU0y3e0xrM=", Nonce="Mzg0MDM1OTJlYTZmMmViZQ==", Created="2018-01-11T14:35:56+00:00"</value>
     	</header>
     </headers>
-    <body type="raw" format="application/json">
-    	<content>{
+    <body>
+    	<content-raw>{
 			"offers":
 						{"filepath": "offer_creation_job27_20180122_151850.csv","md5_checksum": "cfe1df5b07bb0a00f63b8ddff8862a36"}
 			,
@@ -24,7 +24,7 @@
 			,
 			"targets":
 						{"filepath": "offer_allocation_job27_20180122_151850.csv","md5_checksum": "4c46e82d103b25abff9c6a0ba4a0d760"}
-		}</content>
+		}</content-raw>
     </body>
   </request>
 </requests>
